@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比地数据接口服务 - 企业数据API开放平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            min-width: 1200px;
+        }
+        
+        /* 页头样式 */
+        .header {
+            background: #fff;
+            height: 70px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        .header-content {
+            width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo-img {
+            height: 36px;
+            width: auto;
+        }
+        
+        .divider {
+            width: 1px;
+            height: 30px;
+            background: #e8e8e8;
+        }
+        
+        .page-title {
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-left: auto;
+            margin-right: 40px;
+        }
+        
+        /* 顶部搜索框 */
+        .header-search {
+            display: flex;
+            align-items: center;
+            background: #f5f7fa;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            padding: 2px;
+            width: 320px;
+        }
+        
+        .header-search-input {
+            flex: 1;
+            border: none;
+            padding: 10px 14px;
+            font-size: 14px;
+            outline: none;
+            background: transparent;
+        }
+        
+        .header-search-input::placeholder {
+            color: #999;
+        }
+        
+        .header-search-btn {
+            background: #1890ff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .header-search-btn:hover {
+            background: #40a9ff;
+        }
+        
+        .nav-link {
+            font-size: 15px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #1890ff;
+        }
+        
+        .nav-link.active {
+            color: #1890ff;
+            font-weight: 500;
+            border-bottom: 2px solid #1890ff;
+            padding-bottom: 4px;
+        }
+        
+        .hotline {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .hotline-icon {
+            width: 36px;
+            height: 36px;
+            background: #e6f7ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1890ff;
+        }
+        
+        .hotline-text {
+            text-align: right;
+        }
+        
+        .hotline-label {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .hotline-number {
+            font-size: 18px;
+            color: #1890ff;
+            font-weight: 600;
+        }
+
+        /* 用户菜单 */
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: #1890ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .user-name {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Banner区域 */
+        .banner {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+        
+        .banner-content {
+            width: 1200px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .banner-left {
+            color: #fff;
+        }
+        
+        .banner-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .banner-subtitle {
+            font-size: 20px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+        
+        .banner-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            color: #1890ff;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .banner-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .banner-right {
+            position: relative;
+        }
+        
+        .banner-illustration {
+            width: 400px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .banner-illustration i {
+            font-size: 120px;
+            color: rgba(255,255,255,0.3);
+        }
+        
+        /* 新增接口模块 */
+        .new-api-section {
+            background: #fff;
+            padding: 40px 0;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        
+        .new-api-container {
+            width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .new-api-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+        
+        .new-api-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .new-api-title i {
+            color: #ff6b6b;
+            font-size: 28px;
+        }
+        
+        .view-all-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            background: #1890ff;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .view-all-btn:hover {
+            background: #40a9ff;
+            transform: translateY(-1px);
+        }
+        
+        .new-api-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+        
+        .new-api-card {
+            background: linear-gradient(135deg, #e6f7ff 0%, #fff 100%);
+            border: 1px solid #91d5ff;
+            border-radius: 12px;
+            padding: 20px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .new-api-card::before {
+            content: 'NEW';
+            position: absolute;
+            top: 8px;
+            right: -20px;
+            background: #52c41a;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 20px;
+            transform: rotate(45deg);
+        }
+        
+        .new-api-card:hover {
+            box-shadow: 0 8px 24px rgba(24, 144, 255, 0.2);
+            transform: translateY(-4px);
+            border-color: #1890ff;
+        }
+        
+        .new-api-icon {
+            width: 48px;
+            height: 48px;
+            background: #e6f7ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            color: #1890ff;
+            font-size: 24px;
+        }
+        
+        .new-api-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .new-api-category {
+            font-size: 12px;
+            color: #1890ff;
+            background: #e6f7ff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* API介绍区域 */
+        .intro-section {
+            background: #fff;
+            padding: 60px 0;
+        }
+        
+        .section-container {
+            width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #1890ff, #52c41a);
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+        
+        .intro-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+        }
+        
+        .intro-card {
+            background: #fff;
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .intro-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            border-color: #1890ff;
+        }
+        
+        .intro-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #1890ff, #36cfc9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .intro-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .intro-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* 接入流程 */
+        .process-section {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 60px 0;
+        }
+        
+        .process-section .section-title h2 {
+            color: #fff;
+        }
+        
+        .process-section .section-title::after {
+            background: #fff;
+        }
+        
+        .process-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin-top: 48px;
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 100px;
+            right: 100px;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+        
+        .process-icon {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .process-icon i {
+            font-size: 32px;
+            color: #1890ff;
+        }
+        
+        .process-title {
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .process-desc {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+        
+        /* 接入端口 */
+        .ports-section {
+            background: #f8fafc;
+            padding: 60px 0;
+        }
+        
+        .ports-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .port-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .port-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+        
+        .port-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #e6f7ff, #f0f5ff);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        
+        .port-icon i {
+            font-size: 48px;
+            color: #1890ff;
+        }
+        
+        .port-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .port-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* 需求场景 */
+        .scenarios-section {
+            background: #0f172a;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scenarios-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+        }
+        
+        .scenarios-section .section-title h2 {
+            color: #fff;
+        }
+        
+        .scenarios-section .section-title::after {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+        }
+        
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .scenario-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+        
+        .scenario-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .scenario-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .scenario-icon i {
+            font-size: 28px;
+            color: #fff;
+        }
+        
+        .scenario-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+        
+        .scenario-desc {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+        
+        /* 底部 */
+        .footer {
+            background: #1a1a2e;
+            padding: 48px 0 24px;
+        }
+        
+        .footer-content {
+            width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 32px;
+        }
+        
+        .footer-brand {
+            color: #fff;
+        }
+        
+        .footer-logo {
+            height: 40px;
+            margin-bottom: 16px;
+        }
+        
+        .footer-desc {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+        }
+        
+        .footer-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: #1890ff;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 24px;
+            text-align: center;
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+        }
+        
+        /* 弹窗样式 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #fff;
+            border-radius: 12px;
+            width: 480px;
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #e8e8e8;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            background: #fff;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .apply-notice {
+            background: #e6f7ff;
+            border: 1px solid #91d5ff;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .apply-notice i {
+            color: #1890ff;
+            font-size: 16px;
+        }
+        
+        .apply-notice span {
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .apply-notice strong {
+            color: #1890ff;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #1890ff;
+            box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
+        }
+        
+        .apply-footer {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .apply-footer i {
+            color: #1890ff;
+            margin-right: 6px;
+        }
+        
+        .apply-footer span {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .apply-footer strong {
+            color: #1890ff;
+            font-size: 16px;
+        }
+        
+        .btn-detail {
+            padding: 10px 24px;
+            border: 1px solid #d9d9d9;
+            background: #fff;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-detail:hover {
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+        
+        .btn-apply {
+            padding: 10px 24px;
+            border: none;
+            background: #1890ff;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-apply:hover {
+            background: #40a9ff;
+        }
+
+        .btn-test {
+            padding: 10px 24px;
+            border: none;
+            background: #52c41a;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-test:hover {
+            background: #73d13d;
+        }
+    </style>
+</head>
+<body>
+    <!-- 页头 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo-section">
+                    <img src="../LOGO.jpg" alt="比地招标" class="logo-img">
+                    <div class="divider"></div>
+                    <div class="page-title">数据接口服务</div>
+                </div>
+                <div class="header-search">
+                    <input type="text" class="header-search-input" id="searchInput" placeholder="搜索接口名称、ID或关键词...">
+                    <button class="header-search-btn" onclick="searchAPI()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <a href="#" class="nav-link active">首页</a>
+                <a href="所有数据接口.html" class="nav-link">全部数据接口</a>
+                <a href="所有数据接口.html?page=myapis" class="nav-link">我的接口</a>
+            </nav>
+            <div class="user-menu">
+                <div class="user-avatar">张</div>
+                <span class="user-name">张三</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner区域 -->
+    <section class="banner">
+        <div class="banner-content">
+            <div class="banner-left">
+                <h1 class="banner-title">提供招投标大数据接口服务</h1>
+                <p class="banner-subtitle">支持各行业数据调用，助力企业数字化转型</p>
+                <a href="所有数据接口.html?selectMode=true" class="banner-btn">
+                    <i class="fas fa-rocket"></i>
+                    申请接入API
+                </a>
+                <div class="banner-hotline" style="margin-top: 20px; display: flex; align-items: center; gap: 10px; color: #fff; font-size: 18px; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                    <i class="fas fa-phone-alt" style="font-size: 20px; color: #ffd700;"></i>
+                    <span>咨询热线：400-999-4928</span>
+                </div>
+            </div>
+            <div class="banner-right">
+                <div class="banner-illustration">
+                    <i class="fas fa-database"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新增接口模块 -->
+    <section class="new-api-section">
+        <div class="new-api-container">
+            <div class="new-api-header">
+                <div class="new-api-title">
+                    <i class="fas fa-fire"></i>
+                    新增接口
+                </div>
+                <a href="所有数据接口.html" class="view-all-btn">
+                    查看全部接口 <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="new-api-grid">
+                <div class="new-api-card" onclick="showApiDetail('IC-001')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="new-api-name">企业工商基本信息查询</div>
+                    <span class="new-api-category">工商信息</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('JU-001')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="new-api-name">企业被执行人查询</div>
+                    <span class="new-api-category">司法风险</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('BID-001')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <div class="new-api-name">招投标公告查询</div>
+                    <span class="new-api-category">招投标</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('IP-001')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="new-api-name">企业专利信息查询</div>
+                    <span class="new-api-category">知识产权</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('STK-001')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="new-api-name">上市公司基本信息查询</div>
+                    <span class="new-api-category">上市公司</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('CONS-002')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <div class="new-api-name">建筑工程资质查询</div>
+                    <span class="new-api-category">建筑市场</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('IC-002')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <div class="new-api-name">企业分支机构查询</div>
+                    <span class="new-api-category">工商信息</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('JU-002')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-user-slash"></i>
+                    </div>
+                    <div class="new-api-name">企业失信被执行人查询</div>
+                    <span class="new-api-category">司法风险</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('IP-002')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-trademark"></i>
+                    </div>
+                    <div class="new-api-name">企业商标信息查询</div>
+                    <span class="new-api-category">知识产权</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('CONS-004')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="new-api-name">工程项目业绩查询</div>
+                    <span class="new-api-category">建筑市场</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API接口介绍 -->
+    <section class="intro-section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>比地API接口介绍</h2>
+            </div>
+            <div class="intro-grid">
+                <div class="intro-card">
+                    <div class="intro-number">1</div>
+                    <div class="intro-title">数据全面</div>
+                    <div class="intro-desc">覆盖全国数亿家企业数据，涵盖工商、司法、经营等多维度信息</div>
+                </div>
+                <div class="intro-card">
+                    <div class="intro-number">2</div>
+                    <div class="intro-title">实时更新</div>
+                    <div class="intro-desc">数据实时同步更新，确保信息的准确性和时效性</div>
+                </div>
+                <div class="intro-card">
+                    <div class="intro-number">3</div>
+                    <div class="intro-title">接口稳定</div>
+                    <div class="intro-desc">高并发处理能力，99.9%服务可用性，保障业务连续性</div>
+                </div>
+                <div class="intro-card">
+                    <div class="intro-number">4</div>
+                    <div class="intro-title">接入便捷</div>
+                    <div class="intro-desc">标准化API接口，完善的文档支持，快速接入使用</div>
+                </div>
+                <div class="intro-card">
+                    <div class="intro-number">5</div>
+                    <div class="intro-title">专业支持</div>
+                    <div class="intro-desc">7x24小时技术支持，专业团队一对一服务</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API接入流程 -->
+    <section class="process-section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>接口调用流程</h2>
+            </div>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="process-icon">
+                        <i class="fas fa-file-signature"></i>
+                    </div>
+                    <div class="process-title">申请接口</div>
+                    <div class="process-desc">选择所需接口<br>提交接入申请</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="process-title">调试测试</div>
+                    <div class="process-desc">在线测试接口<br>验证数据格式</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <div class="process-title">套餐充值</div>
+                    <div class="process-desc">购买接口套餐<br>充值账户余额</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-icon">
+                        <i class="fas fa-copy"></i>
+                    </div>
+                    <div class="process-title">复制密钥</div>
+                    <div class="process-desc">获取并复制<br>您的API密钥</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="process-title">正式调用</div>
+                    <div class="process-desc">完成对接后<br>正式调用接口</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API可接入端口 -->
+    <section class="ports-section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>API可接入端口</h2>
+            </div>
+            <div class="ports-grid">
+                <div class="port-card">
+                    <div class="port-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="port-title">APP接入</div>
+                    <div class="port-desc">支持iOS、Android移动端应用接入，提供SDK及示例代码，快速集成企业数据查询功能</div>
+                </div>
+                <div class="port-card">
+                    <div class="port-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="port-title">官网接入</div>
+                    <div class="port-desc">支持企业官网、电商平台网站接入，通过API接口实时展示企业信息，提升平台可信度</div>
+                </div>
+                <div class="port-card">
+                    <div class="port-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="port-title">微信接入</div>
+                    <div class="port-desc">支持微信公众号、小程序接入，为微信生态应用提供企业数据查询服务</div>
+                </div>
+                <div class="port-card">
+                    <div class="port-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="port-title">钉钉接入</div>
+                    <div class="port-desc">支持钉钉微应用、工作通知接入，为企业办公场景提供便捷的企业数据查询能力</div>
+                </div>
+                <div class="port-card">
+                    <div class="port-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <div class="port-title">系统集成</div>
+                    <div class="port-desc">支持ERP、CRM、OA等企业内部系统对接，实现数据自动同步和业务流程自动化</div>
+                </div>
+                <div class="port-card">
+                    <div class="port-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="port-title">云服务接入</div>
+                    <div class="port-desc">支持阿里云、腾讯云、华为云等主流云平台部署，提供云端数据服务和高可用架构支持</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API需求场景 -->
+    <section class="scenarios-section">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>API需求场景</h2>
+            </div>
+            <div class="scenarios-grid">
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="scenario-title">企业尽职调查</div>
+                    <div class="scenario-desc">通过企业工商、司法、经营等多维度数据，全面了解合作方背景，降低商业风险</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    <div class="scenario-title">供应商准入审核</div>
+                    <div class="scenario-desc">对供应商进行资质审查和风险评估，确保供应链安全稳定</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="scenario-title">风控合规管理</div>
+                    <div class="scenario-desc">实时监控企业风险动态，及时发现经营异常、司法风险等预警信号</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="scenario-title">市场数据分析</div>
+                    <div class="scenario-desc">基于招投标、知识产权等数据，分析行业趋势和竞争格局</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="scenario-title">金融信贷评估</div>
+                    <div class="scenario-desc">综合企业多维度数据，构建信用评估模型，辅助信贷决策</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="scenario-title">招投标信息监控</div>
+                    <div class="scenario-desc">实时获取招投标公告信息，把握商机，提升中标率</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="scenario-title">建筑企业资质核验</div>
+                    <div class="scenario-desc">验证建筑企业资质证书真伪，查询工程业绩和信用记录，保障工程合作安全</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="scenario-title">客户画像构建</div>
+                    <div class="scenario-desc">整合企业工商、知识产权、招投标数据，构建精准客户画像，助力精准营销</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="scenario-title">法律诉讼预警</div>
+                    <div class="scenario-desc">监控企业司法风险动态，提前预警诉讼、被执行、失信等法律风险</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="scenario-title">知识产权管理</div>
+                    <div class="scenario-desc">追踪企业专利、商标申请动态，分析技术创新能力，评估知识产权价值</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="scenario-title">投资标的筛选</div>
+                    <div class="scenario-desc">基于企业财务、经营、风险数据，筛选优质投资标的，辅助投资决策</div>
+                </div>
+                <div class="scenario-card">
+                    <div class="scenario-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <div class="scenario-title">产业链分析</div>
+                    <div class="scenario-desc">通过企业关联关系、招投标数据，绘制产业链图谱，洞察产业生态</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="LOGO.jpg" alt="比地招标" class="footer-logo">
+                    <p class="footer-desc">比地招标网是国内领先的招投标大数据服务平台，为企业提供全面的招标采购信息及企业数据服务。</p>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">产品服务</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">招标信息</a></li>
+                        <li><a href="#">中标信息</a></li>
+                        <li><a href="#">企业查询</a></li>
+                        <li><a href="#">数据接口</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">关于我们</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">公司介绍</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">新闻动态</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4 class="footer-title">帮助支持</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">使用帮助</a></li>
+                        <li><a href="#">接口文档</a></li>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © 2024 广州比地数据科技有限公司 版权所有 | 粤ICP备XXXXXXXX号</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 接口详情弹窗 -->
+    <div class="modal-overlay" id="detailModal" style="display: none;">
+        <div class="modal-content" style="width: 700px; max-height: 80vh; display: flex; flex-direction: column;">
+            <div class="modal-header">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-info-circle text-blue-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-800" id="detailModalTitle">接口详情</h3>
+                        <p class="text-sm text-slate-500" id="detailModalSubtitle">接口ID: IC-001</p>
+                    </div>
+                </div>
+                <button class="text-slate-400 hover:text-slate-600" onclick="closeDetailModal()">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="display: flex; border-bottom: 1px solid #e8e8e8; margin-bottom: 20px;">
+                    <div class="detail-tab active" onclick="switchDetailTab(this, 'detailInfo')" style="padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; font-size: 14px; color: #666;">接口信息</div>
+                    <div class="detail-tab" onclick="switchDetailTab(this, 'detailRequest')" style="padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; font-size: 14px; color: #666;">请求参数</div>
+                    <div class="detail-tab" onclick="switchDetailTab(this, 'detailResponse')" style="padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; font-size: 14px; color: #666;">响应字段</div>
+                    <div class="detail-tab" onclick="switchDetailTab(this, 'detailErrorCode')" style="padding: 12px 20px; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.3s; font-size: 14px; color: #666;">错误码</div>
+                </div>
+
+                <div id="detailInfo" class="detail-tab-content" style="display: block;">
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px;">
+                        <div>
+                            <p style="font-size: 13px; color: #999; margin-bottom: 4px;">所属分类</p>
+                            <p style="font-size: 15px; color: #333; font-weight: 500;" id="detailCategory">工商信息</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 13px; color: #999; margin-bottom: 4px;">请求方式</p>
+                            <p style="font-size: 15px; color: #333; font-weight: 500;" id="detailMethod">GET</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 13px; color: #999; margin-bottom: 4px;">接口价格</p>
+                            <p style="font-size: 15px; color: #ff4d4f; font-weight: 600;" id="detailPrice">¥0.05/次</p>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <p style="font-size: 13px; color: #999; margin-bottom: 8px;">接口描述</p>
+                        <p style="font-size: 14px; color: #334155; line-height: 1.6;" id="detailDesc">查询企业工商登记基本信息...</p>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <p style="font-size: 13px; color: #999; margin-bottom: 8px;">接口地址</p>
+                        <div style="background: #f0f9ff; color: #096dd9; padding: 12px 16px; border-radius: 6px; font-family: monospace; font-size: 14px; border: 1px solid #bae0ff;" id="detailUrl">https://api.bidizhaobiao.com/v1/company/base</div>
+                    </div>
+                </div>
+
+                <div id="detailRequest" class="detail-tab-content" style="display: none;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">参数名</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">参数说明</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">类型</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">是否必填</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">描述</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">示例值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">app_key</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">AppKey</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">string</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">是</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">应用密钥，控制台申请获得</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">YOUR_APP_KEY</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">timestamp</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">时间戳</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">string</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">是</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">请求时间戳（毫秒），有效期10分钟</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">1711123456789</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">sign</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">签名</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">string</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">是</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">MD5(app_key+timestamp+app_secret)，32位小写</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">a1b2c3...</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">company_name</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">企业名称</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">string</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">与credit_code二选一</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">精确或模糊匹配企业名称</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">某某科技有限公司</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">credit_code</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">统一社会信用代码</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">string</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">与company_name二选一</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">18位统一社会信用代码</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">91310105MA1FW4X09L</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="detailResponse" class="detail-tab-content" style="display: none;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">字段名</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">字段说明</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">类型</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">备注/说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">company_name</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">企业名称</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(255)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">company_code</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">注册号</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">credit_no</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">统一信用代码</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">org_code</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">组织机构代码</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(20)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">tax_code</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">税务号</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">establish_date</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">成立日期</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">date</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">legal_person</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">法定代表人</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(255)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">legal_person_caption</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">法人人头衔</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(10)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">company_status</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">登记状态</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">company_type</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">类型</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">authority</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">登记机关</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(255)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">issue_date</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">核准日期</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">date</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">operation_startdate</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">营业期限自</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">operation_enddate</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">营业期限至</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">capital</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">注册资本</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">company_address</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">地址</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(300)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">business_scope</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">经营范围</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">text</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">cancel_date</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">注销日期</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">date</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">cancel_reason</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">注销原因</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(500)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">revoke_date</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">吊销日期</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">date</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">revoke_reason</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">吊销原因</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(500)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">use_flag</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">使用标记，10废弃数据</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">tinyint(4)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">legal_person_type</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">法人类型，0自然人，1非</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">tinyint(4)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">real_capital</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">实缴资本</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">en_name</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">英文名称</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(255)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">list_code</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">上市代码</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">varchar(50)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">legal_person_id</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">法人id</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">char(32)</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="detailErrorCode" class="detail-tab-content" style="display: none;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">错误码</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">错误标识</th>
+                                <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8e8e8; background: #f8fafc; font-weight: 600; color: #475569; font-size: 13px;">说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">200</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">SUCCESS</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">请求成功</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">400</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">INVALID_PARAMS</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">请求参数有误</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">401</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">UNAUTHORIZED</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">AppKey无效或签</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">403</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">FORBIDDEN</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">无权限访问该接</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">404</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">NOT_FOUND</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">查询数据不存在</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">429</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">RATE_LIMIT</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">请求频率超限，请</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">500</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">SERVER_ERROR</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">服务端内部错误</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">503</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">SERVICE_UNAVAILABLE</td>
+                                <td style="padding: 12px 16px; border-bottom: 1px solid #e8e8e8; font-size: 14px;">服务暂时不可用</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn-detail" onclick="closeDetailModal()">关闭</button>
+                <button class="btn-test" onclick="openTestModalFromHome()">
+                    <i class="fas fa-bug"></i> 在线测试
+                </button>
+                <button class="btn-apply" onclick="applyFromDetail()">+ 申请接口</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 申请接口弹窗 -->
+    <div class="modal-overlay" id="applyModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-lg font-semibold text-slate-800">申请接口</h3>
+                <button class="text-slate-400 hover:text-slate-600" onclick="closeApplyModal()">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="apply-notice">
+                    <i class="fas fa-info-circle"></i>
+                    <span>您正在申请 <strong id="applyApiName">数据接口服务</strong></span>
+                </div>
+                <form id="applyForm">
+                    <div class="form-group">
+                        <label class="form-label">联系人 <span class="text-red-500">*</span></label>
+                        <input type="text" class="form-input" id="contactName" placeholder="请输入联系人姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">联系电话 <span class="text-red-500">*</span></label>
+                        <input type="tel" class="form-input" id="contactPhone" placeholder="请输入联系电话" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">公司名称</label>
+                        <input type="text" class="form-input" id="companyName" placeholder="请输入公司名称（选填）">
+                    </div>
+                </form>
+                <div class="apply-footer">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>官方客服电话：<strong>400-999-4928</strong></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-detail" onclick="closeApplyModal()">取消</button>
+                <button class="btn-apply" onclick="submitApply()">提交申请</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 在线测试弹窗 -->
+    <div class="modal-overlay" id="testModal" style="display: none;">
+        <div class="modal-content" style="width: 800px; max-height: 85vh;">
+            <div class="modal-header">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-green-50 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-code text-green-600"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-slate-800">API Explorer - 在线调试</h3>
+                        <p class="text-sm text-slate-500" id="testModalSubtitle">企业工商基本信息查询</p>
+                    </div>
+                </div>
+                <button class="text-slate-400 hover:text-slate-600" onclick="closeTestModal()">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="display: flex; gap: 20px; height: 500px;">
+                    <!-- 左侧：请求参数 -->
+                    <div style="flex: 1; display: flex; flex-direction: column;">
+                        <div style="font-weight: 600; color: #333; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-sliders-h" style="color: #1890ff;"></i>
+                            请求参数
+                        </div>
+                        <div style="flex: 1; overflow-y: auto;">
+                            <div style="margin-bottom: 16px;">
+                                <div style="font-size: 13px; color: #666; margin-bottom: 6px;">
+                                    keyword <span style="color: #ff4d4f;">*</span>
+                                </div>
+                                <input type="text" id="testKeyword" placeholder="企业名称" value="阿里巴巴" 
+                                    style="width: 100%; padding: 8px 12px; border: 1px solid #d9d9d9; border-radius: 4px; font-size: 14px;">
+                            </div>
+                            <div style="margin-bottom: 16px;">
+                                <div style="font-size: 13px; color: #666; margin-bottom: 6px;">
+                                    appkey <span style="color: #ff4d4f;">*</span>
+                                </div>
+                                <input type="text" value="bidi_ak_2vN8xK3m..." disabled 
+                                    style="width: 100%; padding: 8px 12px; border: 1px solid #d9d9d9; border-radius: 4px; font-size: 14px; background: #f5f5f5; color: #999;">
+                            </div>
+                        </div>
+                        <button onclick="sendTestRequest()" 
+                            style="width: 100%; padding: 10px; background: #1890ff; color: #fff; border: none; border-radius: 4px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class="fas fa-paper-plane"></i>
+                            发送请求
+                        </button>
+                    </div>
+                    <!-- 右侧：响应结果 -->
+                    <div style="flex: 1; display: flex; flex-direction: column; background: #f8f9fa; border-radius: 8px; padding: 16px;">
+                        <div style="font-weight: 600; color: #333; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-reply" style="color: #52c41a;"></i>
+                            响应结果
+                        </div>
+                        <div id="testResponse" style="flex: 1; overflow-y: auto; font-family: monospace; font-size: 13px; line-height: 1.6; color: #333;">
+                            <div style="color: #999; text-align: center; margin-top: 100px;">
+                                <i class="fas fa-arrow-left" style="font-size: 24px; margin-bottom: 12px; display: block;"></i>
+                                点击"发送请求"查看结果
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentApiName = '数据接口服务';
+        let currentApiId = '';
+
+        // API详情数据
+        const apiDetails = {
+            'IC-001': {
+                name: '企业工商基本信息查询',
+                category: '工商信息',
+                method: 'GET',
+                path: '/v1/company/base',
+                desc: '查询企业工商登记基本信息，包括企业名称、法定代表人、注册资本、成立日期、经营状态、经营范围等。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '是', desc: '查询关键词（企业名称/注册号/统一社会信用代码）' },
+                    { name: 'page', type: 'int', required: '否', desc: '页码，默认1' },
+                    { name: 'pageSize', type: 'int', required: '否', desc: '每页条数，默认20，最大100' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码，200表示成功' },
+                    { name: 'message', type: 'string', desc: '返回信息' },
+                    { name: 'data', type: 'object', desc: '企业工商基本信息数据' }
+                ]
+            },
+            'JU-001': {
+                name: '企业被执行人查询',
+                category: '司法风险',
+                method: 'GET',
+                path: '/v1/judicial/executed',
+                desc: '查询企业作为被执行人的强制执行记录，包括立案时间、执行标的金额及执行法院。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称或统一社会信用代码' },
+                    { name: 'page', type: 'int', required: '否', desc: '页码，默认1' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '被执行人记录列表' }
+                ]
+            },
+            'BID-001': {
+                name: '招投标公告查询',
+                category: '招投标',
+                method: 'GET',
+                path: '/v1/bid/announcement',
+                desc: '查询招投标公告信息，包括招标公告、中标公告、变更公告等。支持按地区、行业、金额、时间等条件筛选。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '否', desc: '关键词搜索' },
+                    { name: 'province', type: 'string', required: '否', desc: '省份代码' },
+                    { name: 'industry', type: 'string', required: '否', desc: '行业分类' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '招投标公告列表' }
+                ]
+            },
+            'IP-001': {
+                name: '企业专利信息查询',
+                category: '知识产权',
+                method: 'GET',
+                path: '/v1/ip/patent',
+                desc: '查询企业专利申请及授权信息，包括专利名称、专利类型、申请号、公开号及法律状态。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' },
+                    { name: 'patentType', type: 'string', required: '否', desc: '专利类型' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '专利信息列表' }
+                ]
+            },
+            'STK-001': {
+                name: '上市公司基本信息查询',
+                category: '上市公司',
+                method: 'GET',
+                path: '/v1/stock/basic',
+                desc: '查询上市公司基本信息，包括股票代码、上市交易所、上市日期、行业分类及市值信息。',
+                requestParams: [
+                    { name: 'stockCode', type: 'string', required: '是', desc: '股票代码' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '上市公司基本信息' }
+                ]
+            },
+            'CONS-002': {
+                name: '建筑工程资质查询',
+                category: '建筑市场',
+                method: 'GET',
+                path: '/v1/construction/qualification',
+                desc: '查询企业持有的建筑工程资质信息，包括资质序列、资质名称、证书编号、有效期及发证机关。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '资质信息列表' }
+                ]
+            },
+            'IC-002': {
+                name: '企业分支机构查询',
+                category: '工商信息',
+                method: 'GET',
+                path: '/v1/company/branch',
+                desc: '查询企业的分支机构列表，包括分支机构名称、负责人、经营状态、注册地址等信息。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '分支机构列表' }
+                ]
+            },
+            'JU-002': {
+                name: '企业失信被执行人查询',
+                category: '司法风险',
+                method: 'GET',
+                path: '/v1/judicial/dishonest',
+                desc: '查询企业列入失信被执行人（老赖）名单信息，包括失信情形、列入时间及履行情况。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '失信被执行人记录' }
+                ]
+            },
+            'IP-002': {
+                name: '企业商标信息查询',
+                category: '知识产权',
+                method: 'GET',
+                path: '/v1/ip/trademark',
+                desc: '查询企业商标申请及注册信息，包括商标名称、注册号、注册类别、有效期及转让记录。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '商标信息列表' }
+                ]
+            },
+            'CONS-004': {
+                name: '工程项目业绩查询',
+                category: '建筑市场',
+                method: 'GET',
+                path: '/v1/construction/project-performance',
+                desc: '查询企业承建工程项目业绩信息，包括项目名称、项目类型、合同金额、竣工日期及建设单位。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '项目业绩列表' }
+                ]
+            }
+        };
+
+        // 显示接口详情弹窗
+        function showApiDetail(apiId) {
+            const api = apiDetails[apiId];
+            if (!api) return;
+
+            currentApiId = apiId;
+            currentApiName = api.name;
+
+            document.getElementById('detailModalTitle').textContent = api.name;
+            document.getElementById('detailModalSubtitle').textContent = `接口ID: ${apiId}`;
+            document.getElementById('detailCategory').textContent = api.category;
+            document.getElementById('detailMethod').textContent = api.method;
+            document.getElementById('detailPrice').textContent = '¥0.05/次';
+            document.getElementById('detailDesc').textContent = api.desc;
+            document.getElementById('detailUrl').textContent = `https://api.bidizhaobiao.com${api.path}`;
+
+            // 重置标签页
+            document.querySelectorAll('.detail-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.color = '#666';
+                tab.style.borderBottomColor = 'transparent';
+            });
+            document.querySelectorAll('.detail-tab-content').forEach(content => content.style.display = 'none');
+            
+            const firstTab = document.querySelector('.detail-tab');
+            firstTab.classList.add('active');
+            firstTab.style.color = '#1890ff';
+            firstTab.style.borderBottomColor = '#1890ff';
+            document.getElementById('detailInfo').style.display = 'block';
+
+            // 显示弹窗
+            document.getElementById('detailModal').style.display = 'flex';
+        }
+
+        // 关闭接口详情弹窗
+        function closeDetailModal() {
+            document.getElementById('detailModal').style.display = 'none';
+        }
+
+        // 切换详情标签页
+        function switchDetailTab(tabElement, contentId) {
+            // 重置所有标签
+            document.querySelectorAll('.detail-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.color = '#666';
+                tab.style.borderBottomColor = 'transparent';
+            });
+            document.querySelectorAll('.detail-tab-content').forEach(content => content.style.display = 'none');
+            
+            // 激活当前标签
+            tabElement.classList.add('active');
+            tabElement.style.color = '#1890ff';
+            tabElement.style.borderBottomColor = '#1890ff';
+            document.getElementById(contentId).style.display = 'block';
+        }
+
+        // 保留的旧函数（用于参考）
+        function _old_showApiDetail(apiId) {
+            const api = apiDetails[apiId];
+            if (!api) return;
+
+            currentApiId = apiId;
+            currentApiName = api.name;
+
+            document.getElementById('detailModalTitle').textContent = api.name;
+            document.getElementById('detailModalSubtitle').textContent = `接口ID: ${apiId}`;
+            document.getElementById('detailCategory').textContent = api.category;
+            document.getElementById('detailMethod').textContent = api.method;
+            document.getElementById('detailId').textContent = apiId;
+            document.getElementById('detailDesc').textContent = api.desc;
+            document.getElementById('detailUrl').textContent = `https://api.bidizhaobiao.com${api.path}`;
+
+            // 重置标签页
+            document.querySelectorAll('.detail-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.color = '#666';
+                tab.style.borderBottomColor = 'transparent';
+            });
+            document.querySelectorAll('.detail-tab-content').forEach(content => content.style.display = 'none');
+            
+            const firstTab = document.querySelector('.detail-tab');
+            firstTab.classList.add('active');
+            firstTab.style.color = '#1890ff';
+            firstTab.style.borderBottomColor = '#1890ff';
+            document.getElementById('detailInfo').style.display = 'block';
+
+            document.getElementById('detailModal').classList.add('show');
+        }
+
+        // 切换详情标签页
+        function switchDetailTab(element, tabId) {
+            document.querySelectorAll('.detail-tab').forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.color = '#666';
+                tab.style.borderBottomColor = 'transparent';
+            });
+            document.querySelectorAll('.detail-tab-content').forEach(content => content.style.display = 'none');
+            
+            element.classList.add('active');
+            element.style.color = '#1890ff';
+            element.style.borderBottomColor = '#1890ff';
+            document.getElementById(tabId).style.display = 'block';
+        }
+
+
+
+        // 从详情页申请接口 - 跳转到所有数据接口页面的选择模式
+        function applyFromDetail() {
+            closeDetailModal();
+            // 跳转到所有数据接口页面，并带上当前接口ID和选择模式参数
+            window.location.href = `所有数据接口.html?selectMode=true&apiId=${currentApiId || ''}`;
+        }
+
+        // 显示申请弹窗
+        function showApplyModal(apiId) {
+            if (apiId === 'all') {
+                currentApiName = '数据接口服务';
+            } else {
+                const api = apiDetails[apiId];
+                currentApiName = api ? api.name : '数据接口服务';
+            }
+            document.getElementById('applyApiName').textContent = currentApiName;
+            document.getElementById('applyModal').style.display = 'flex';
+        }
+
+        // 关闭申请弹窗
+        function closeApplyModal() {
+            document.getElementById('applyModal').style.display = 'none';
+        }
+
+        // 搜索API
+        function searchAPI() {
+            const keyword = document.getElementById('searchInput').value.trim();
+            if (!keyword) {
+                alert('请输入搜索关键词');
+                return;
+            }
+            // 跳转到所有数据接口.html并传递搜索参数
+            window.location.href = `所有数据接口.html?search=${encodeURIComponent(keyword)}`;
+        }
+        
+        // 回车搜索
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchAPI();
+            }
+        });
+
+        // 打开在线测试弹窗
+        function openTestModalFromHome() {
+            document.getElementById('testModalSubtitle').textContent = currentApiName;
+            document.getElementById('testModal').style.display = 'flex';
+        }
+
+        // 关闭在线测试弹窗
+        function closeTestModal() {
+            document.getElementById('testModal').style.display = 'none';
+        }
+
+        // 发送测试请求
+        function sendTestRequest() {
+            const responseDiv = document.getElementById('testResponse');
+            const keyword = document.getElementById('testKeyword').value || '阿里巴巴';
+            
+            // 显示加载状态
+            responseDiv.innerHTML = `
+                <div style="text-align: center; margin-top: 100px; color: #999;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 12px; display: block; color: #1890ff;"></i>
+                    请求发送中...
+                </div>
+            `;
+            
+            // 模拟网络延迟
+            setTimeout(() => {
+                responseDiv.innerHTML = `
+                    <div style="margin-bottom: 8px;"><i class="fas fa-check-circle" style="color: #52c41a;"></i> <span style="color: #52c41a; font-weight: 500;">请求成功</span></div>
+                    <div style="background: #fff; padding: 12px; border-radius: 4px; border: 1px solid #e8e8e8; font-size: 12px; line-height: 1.8; overflow-x: auto;">
+                        <div><span style="color: #d73a49;">const</span> response = <span style="color: #d73a49;">await</span> fetch(<span style="color: #032f62;">'https://api.bidizhaobiao.com${currentApiId ? apiDetails[currentApiId]?.path || '/v1/company/base' : '/v1/company/base'}?keyword=${encodeURIComponent(keyword)}'</span>, {</div>
+                        <div style="padding-left: 12px;">method: <span style="color: #032f62;">'GET'</span>,</div>
+                        <div style="padding-left: 12px;">headers: {</div>
+                        <div style="padding-left: 24px;"><span style="color: #032f62;">'Authorization'</span>: <span style="color: #032f62;">'Bearer bidi_ak_2vN8xK3m...'</span>,</div>
+                        <div style="padding-left: 24px;"><span style="color: #032f62;">'Content-Type'</span>: <span style="color: #032f62;">'application/json'</span></div>
+                        <div style="padding-left: 12px;">}</div>
+                        <div>});</div>
+                        <div style="margin-top: 8px;"><span style="color: #d73a49;">const</span> data = <span style="color: #d73a49;">await</span> response.json();</div>
+                        <div>console.log(data);</div>
+                    </div>
+                    <div style="margin-top: 12px; background: #fff; padding: 12px; border-radius: 4px; border: 1px solid #e8e8e8;">
+                        <div style="color: #666; margin-bottom: 8px; font-weight: 500;">响应结果：</div>
+                        <pre style="margin: 0; white-space: pre-wrap; word-break: break-all;">{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "companyName": "${keyword}有限公司",
+    "creditCode": "91310000MA1FL7B38J",
+    "legalPerson": "张三",
+    "regCapital": "10000万元",
+    "establishDate": "2010-01-01",
+    "companyStatus": "存续",
+    "companyType": "有限责任公司"
+  },
+  "cost": 0.05
+}</pre>
+                    </div>
+                `;
+            }, 800);
+        }
+
+        // 点击弹窗外部关闭测试弹窗
+        document.getElementById('testModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeTestModal();
+            }
+        });
+
+        // 提交申请
+        function submitApply() {
+            const name = document.getElementById('contactName').value.trim();
+            const phone = document.getElementById('contactPhone').value.trim();
+            const company = document.getElementById('companyName').value.trim();
+
+            if (!name) {
+                alert('请输入联系人姓名');
+                return;
+            }
+            if (!phone) {
+                alert('请输入联系电话');
+                return;
+            }
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                alert('请输入正确的手机号码');
+                return;
+            }
+
+            let successMsg = `申请提交成功！\n\n接口：${currentApiName}\n联系人：${name}\n电话：${phone}`;
+            if (company) {
+                successMsg += `\n公司名称：${company}`;
+            }
+            successMsg += `\n\n我们的客服人员将在24小时内与您联系。`;
+            
+            alert(successMsg);
+            closeApplyModal();
+            document.getElementById('applyForm').reset();
+        }
+
+        // 点击弹窗外部关闭
+        document.getElementById('applyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeApplyModal();
+            }
+        });
+
+        document.getElementById('detailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeDetailModal();
+            }
+        });
+    </script>
+</body>
+</html>
