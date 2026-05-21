@@ -977,7 +977,7 @@
                 </a>
                 <div class="banner-hotline" style="margin-top: 20px; display: flex; align-items: center; gap: 10px; color: #fff; font-size: 18px; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
                     <i class="fas fa-phone-alt" style="font-size: 20px; color: #ffd700;"></i>
-                    <span>咨询热线：400-999-4928</span>
+                    <span>咨询热线：13911878573</span>
                 </div>
             </div>
             <div class="banner-right">
@@ -1001,6 +1001,48 @@
                 </a>
             </div>
             <div class="new-api-grid">
+                <div class="new-api-card" onclick="showApiDetail('BID-001')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="new-api-name">公告详情</div>
+                    <span class="new-api-category">招投标</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('BID-002')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <div class="new-api-name">公告要素提取</div>
+                    <span class="new-api-category">招投标</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('BID-003')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="new-api-name">拟在建详情</div>
+                    <span class="new-api-category">招投标</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('BID-004')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="new-api-name">拟在建项目查询</div>
+                    <span class="new-api-category">招投标</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('BID-005')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="new-api-name">审批详情</div>
+                    <span class="new-api-category">招投标</span>
+                </div>
+                <div class="new-api-card" onclick="showApiDetail('BID-006')">
+                    <div class="new-api-icon">
+                        <i class="fas fa-list-alt"></i>
+                    </div>
+                    <div class="new-api-name">审批项目查询</div>
+                    <span class="new-api-category">招投标</span>
+                </div>
                 <div class="new-api-card" onclick="showApiDetail('IC-001')">
                     <div class="new-api-icon">
                         <i class="fas fa-building"></i>
@@ -1015,13 +1057,6 @@
                     <div class="new-api-name">企业被执行人查询</div>
                     <span class="new-api-category">司法风险</span>
                 </div>
-                <div class="new-api-card" onclick="showApiDetail('BID-001')">
-                    <div class="new-api-icon">
-                        <i class="fas fa-file-contract"></i>
-                    </div>
-                    <div class="new-api-name">招投标公告查询</div>
-                    <span class="new-api-category">招投标</span>
-                </div>
                 <div class="new-api-card" onclick="showApiDetail('IP-001')">
                     <div class="new-api-icon">
                         <i class="fas fa-lightbulb"></i>
@@ -1029,46 +1064,11 @@
                     <div class="new-api-name">企业专利信息查询</div>
                     <span class="new-api-category">知识产权</span>
                 </div>
-                <div class="new-api-card" onclick="showApiDetail('STK-001')">
-                    <div class="new-api-icon">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <div class="new-api-name">上市公司基本信息查询</div>
-                    <span class="new-api-category">上市公司</span>
-                </div>
-                <div class="new-api-card" onclick="showApiDetail('CONS-002')">
+                <div class="new-api-card" onclick="showApiDetail('BUILD-003')">
                     <div class="new-api-icon">
                         <i class="fas fa-hard-hat"></i>
                     </div>
                     <div class="new-api-name">建筑工程资质查询</div>
-                    <span class="new-api-category">建筑市场</span>
-                </div>
-                <div class="new-api-card" onclick="showApiDetail('IC-002')">
-                    <div class="new-api-icon">
-                        <i class="fas fa-sitemap"></i>
-                    </div>
-                    <div class="new-api-name">企业分支机构查询</div>
-                    <span class="new-api-category">工商信息</span>
-                </div>
-                <div class="new-api-card" onclick="showApiDetail('JU-002')">
-                    <div class="new-api-icon">
-                        <i class="fas fa-user-slash"></i>
-                    </div>
-                    <div class="new-api-name">企业失信被执行人查询</div>
-                    <span class="new-api-category">司法风险</span>
-                </div>
-                <div class="new-api-card" onclick="showApiDetail('IP-002')">
-                    <div class="new-api-icon">
-                        <i class="fas fa-trademark"></i>
-                    </div>
-                    <div class="new-api-name">企业商标信息查询</div>
-                    <span class="new-api-category">知识产权</span>
-                </div>
-                <div class="new-api-card" onclick="showApiDetail('CONS-004')">
-                    <div class="new-api-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <div class="new-api-name">工程项目业绩查询</div>
                     <span class="new-api-category">建筑市场</span>
                 </div>
             </div>
@@ -1120,17 +1120,17 @@
             <div class="process-timeline">
                 <div class="process-step">
                     <div class="process-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="process-title">账号注册</div>
+                    <div class="process-desc">首页注册比地<br>招标网账号</div>
+                </div>
+                <div class="process-step">
+                    <div class="process-icon">
                         <i class="fas fa-file-signature"></i>
                     </div>
                     <div class="process-title">申请接口</div>
                     <div class="process-desc">选择所需接口<br>提交接入申请</div>
-                </div>
-                <div class="process-step">
-                    <div class="process-icon">
-                        <i class="fas fa-bug"></i>
-                    </div>
-                    <div class="process-title">调试测试</div>
-                    <div class="process-desc">在线测试接口<br>验证数据格式</div>
                 </div>
                 <div class="process-step">
                     <div class="process-icon">
@@ -1726,7 +1726,7 @@
                 </form>
                 <div class="apply-footer">
                     <i class="fas fa-phone-alt"></i>
-                    <span>官方客服电话：<strong>400-999-4928</strong></span>
+                    <span>官方客服电话：<strong>13911878573</strong></span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -1776,6 +1776,16 @@
                                 <input type="text" value="bidi_ak_2vN8xK3m..." disabled 
                                     style="width: 100%; padding: 8px 12px; border: 1px solid #d9d9d9; border-radius: 4px; font-size: 14px; background: #f5f5f5; color: #999;">
                             </div>
+                            <div style="background: #fff7e6; border: 1px solid #ffd591; border-radius: 4px; padding: 12px; margin-bottom: 16px;">
+                                <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #1890ff; font-weight: 600; margin-bottom: 8px;">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>提示</span>
+                                </div>
+                                <div style="font-size: 12px; color: #666; line-height: 1.8;">
+                                    <div>• 在线测试会真实扣费，请谨慎使用</div>
+                                    <div>• 当前余额: <span style="color: #52c41a; font-weight: 600;">¥2,580.00</span>，本次将消费 <span style="color: #f5222d; font-weight: 600;">¥0.05</span> 元</div>
+                                </div>
+                            </div>
                         </div>
                         <button onclick="sendTestRequest()" 
                             style="width: 100%; padding: 10px; background: #1890ff; color: #fff; border: none; border-radius: 4px; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -1807,6 +1817,93 @@
 
         // API详情数据
         const apiDetails = {
+            'BID-001': {
+                name: '公告详情',
+                category: '招投标',
+                method: 'GET',
+                path: '/v1/bid/detail',
+                desc: '查询招投标公告详细信息，包括公告标题、内容、招标单位、投标截止时间、开标时间等完整信息。',
+                requestParams: [
+                    { name: 'id', type: 'string', required: '是', desc: '公告ID' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码，200表示成功' },
+                    { name: 'data', type: 'object', desc: '公告详情数据' }
+                ]
+            },
+            'BID-002': {
+                name: '公告要素提取',
+                category: '招投标',
+                method: 'GET',
+                path: '/v1/bid/extract',
+                desc: '智能提取公告关键要素，自动识别项目名称、预算金额、招标单位、联系方式等核心信息。',
+                requestParams: [
+                    { name: 'content', type: 'string', required: '是', desc: '公告内容文本' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '提取的要素信息' }
+                ]
+            },
+            'BID-003': {
+                name: '拟在建详情',
+                category: '招投标',
+                method: 'GET',
+                path: '/v1/bid/planned-detail',
+                desc: '查询拟在建项目详细信息，包括项目概况、投资规模、建设周期、项目进展状态等。',
+                requestParams: [
+                    { name: 'id', type: 'string', required: '是', desc: '项目ID' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '拟在建项目详情' }
+                ]
+            },
+            'BID-004': {
+                name: '拟在建项目查询',
+                category: '招投标',
+                method: 'GET',
+                path: '/v1/bid/planned-list',
+                desc: '查询拟在建项目列表，支持按地区、行业、投资规模等条件筛选，获取项目立项信息。',
+                requestParams: [
+                    { name: 'province', type: 'string', required: '否', desc: '省份' },
+                    { name: 'industry', type: 'string', required: '否', desc: '行业' },
+                    { name: 'page', type: 'int', required: '否', desc: '页码' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '拟在建项目列表' }
+                ]
+            },
+            'BID-005': {
+                name: '审批详情',
+                category: '招投标',
+                method: 'GET',
+                path: '/v1/bid/approval-detail',
+                desc: '查询项目审批详细信息，包括审批事项、审批机关、审批结果、批复文件等。',
+                requestParams: [
+                    { name: 'id', type: 'string', required: '是', desc: '审批ID' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '审批详情' }
+                ]
+            },
+            'BID-006': {
+                name: '审批项目查询',
+                category: '招投标',
+                method: 'GET',
+                path: '/v1/bid/approval-list',
+                desc: '查询审批项目列表，获取项目审批进度、审批状态、审批时间等信息。',
+                requestParams: [
+                    { name: 'keyword', type: 'string', required: '否', desc: '关键词' },
+                    { name: 'page', type: 'int', required: '否', desc: '页码' }
+                ],
+                responseParams: [
+                    { name: 'code', type: 'int', desc: '状态码' },
+                    { name: 'data', type: 'object', desc: '审批项目列表' }
+                ]
+            },
             'IC-001': {
                 name: '企业工商基本信息查询',
                 category: '工商信息',
@@ -1839,22 +1936,6 @@
                     { name: 'data', type: 'object', desc: '被执行人记录列表' }
                 ]
             },
-            'BID-001': {
-                name: '招投标公告查询',
-                category: '招投标',
-                method: 'GET',
-                path: '/v1/bid/announcement',
-                desc: '查询招投标公告信息，包括招标公告、中标公告、变更公告等。支持按地区、行业、金额、时间等条件筛选。',
-                requestParams: [
-                    { name: 'keyword', type: 'string', required: '否', desc: '关键词搜索' },
-                    { name: 'province', type: 'string', required: '否', desc: '省份代码' },
-                    { name: 'industry', type: 'string', required: '否', desc: '行业分类' }
-                ],
-                responseParams: [
-                    { name: 'code', type: 'int', desc: '状态码' },
-                    { name: 'data', type: 'object', desc: '招投标公告列表' }
-                ]
-            },
             'IP-001': {
                 name: '企业专利信息查询',
                 category: '知识产权',
@@ -1870,88 +1951,18 @@
                     { name: 'data', type: 'object', desc: '专利信息列表' }
                 ]
             },
-            'STK-001': {
-                name: '上市公司基本信息查询',
-                category: '上市公司',
-                method: 'GET',
-                path: '/v1/stock/basic',
-                desc: '查询上市公司基本信息，包括股票代码、上市交易所、上市日期、行业分类及市值信息。',
-                requestParams: [
-                    { name: 'stockCode', type: 'string', required: '是', desc: '股票代码' }
-                ],
-                responseParams: [
-                    { name: 'code', type: 'int', desc: '状态码' },
-                    { name: 'data', type: 'object', desc: '上市公司基本信息' }
-                ]
-            },
-            'CONS-002': {
+            'BUILD-003': {
                 name: '建筑工程资质查询',
                 category: '建筑市场',
                 method: 'GET',
-                path: '/v1/construction/qualification',
-                desc: '查询企业持有的建筑工程资质信息，包括资质序列、资质名称、证书编号、有效期及发证机关。',
+                path: '/v1/build/qualification',
+                desc: '查询建筑企业资质证书信息，包括资质等级、资质类别、证书编号、有效期及发证机关。',
                 requestParams: [
                     { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
                 ],
                 responseParams: [
                     { name: 'code', type: 'int', desc: '状态码' },
                     { name: 'data', type: 'object', desc: '资质信息列表' }
-                ]
-            },
-            'IC-002': {
-                name: '企业分支机构查询',
-                category: '工商信息',
-                method: 'GET',
-                path: '/v1/company/branch',
-                desc: '查询企业的分支机构列表，包括分支机构名称、负责人、经营状态、注册地址等信息。',
-                requestParams: [
-                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
-                ],
-                responseParams: [
-                    { name: 'code', type: 'int', desc: '状态码' },
-                    { name: 'data', type: 'object', desc: '分支机构列表' }
-                ]
-            },
-            'JU-002': {
-                name: '企业失信被执行人查询',
-                category: '司法风险',
-                method: 'GET',
-                path: '/v1/judicial/dishonest',
-                desc: '查询企业列入失信被执行人（老赖）名单信息，包括失信情形、列入时间及履行情况。',
-                requestParams: [
-                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
-                ],
-                responseParams: [
-                    { name: 'code', type: 'int', desc: '状态码' },
-                    { name: 'data', type: 'object', desc: '失信被执行人记录' }
-                ]
-            },
-            'IP-002': {
-                name: '企业商标信息查询',
-                category: '知识产权',
-                method: 'GET',
-                path: '/v1/ip/trademark',
-                desc: '查询企业商标申请及注册信息，包括商标名称、注册号、注册类别、有效期及转让记录。',
-                requestParams: [
-                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
-                ],
-                responseParams: [
-                    { name: 'code', type: 'int', desc: '状态码' },
-                    { name: 'data', type: 'object', desc: '商标信息列表' }
-                ]
-            },
-            'CONS-004': {
-                name: '工程项目业绩查询',
-                category: '建筑市场',
-                method: 'GET',
-                path: '/v1/construction/project-performance',
-                desc: '查询企业承建工程项目业绩信息，包括项目名称、项目类型、合同金额、竣工日期及建设单位。',
-                requestParams: [
-                    { name: 'keyword', type: 'string', required: '是', desc: '企业名称' }
-                ],
-                responseParams: [
-                    { name: 'code', type: 'int', desc: '状态码' },
-                    { name: 'data', type: 'object', desc: '项目业绩列表' }
                 ]
             }
         };
