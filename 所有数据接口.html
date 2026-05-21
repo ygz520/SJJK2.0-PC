@@ -1650,7 +1650,7 @@
                     <span class="balance-amount">购买接口套餐</span>
                 </div>
                 <div class="header-nav" style="margin: 0;">
-                    <a href="index.html" class="nav-btn">首页</a>
+                    <a href="首页.html" class="nav-btn">首页</a>
                     <a href="#" class="nav-btn active" onclick="showPage('apis')">全部数据接口</a>
                     <a href="#" class="nav-btn" onclick="showPage('myapis')">我的接口</a>
                 </div>
@@ -1987,6 +1987,11 @@
                                 <i class="fas fa-check-circle" style="color: #52c41a;"></i>
                                 正式调用
                             </span>
+                        </div>
+                        <!-- 专属人工服务提示 -->
+                        <div style="margin-top: 12px; padding: 10px 16px; background: #f6ffed; border: 1px solid #b7eb8f; border-radius: 6px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-headset" style="color: #52c41a; font-size: 14px;"></i>
+                            <span style="font-size: 12px; color: #333;">专属人工服务：接口使用遇到问题？请联系客服经理 <strong style="color: #1890ff;">13911878573</strong>，我们将为您提供一对一技术支持</span>
                         </div>
                     </div>
                 </div>
@@ -2608,6 +2613,12 @@
                         </div>
                         <div style="font-size: 12px; color: #999;">最小充值金额 10 元</div>
                     </div>
+                </div>
+
+                <!-- 大额合作提示 -->
+                <div style="background: #e6f7ff; border: 1px solid #91d5ff; border-radius: 8px; padding: 12px 16px; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-phone-alt" style="color: #1890ff; font-size: 16px;"></i>
+                    <span style="font-size: 13px; color: #333;">大额合作或定制化需求，请联系客服经理 <strong style="color: #1890ff;">13911878573</strong> 获取专属优惠方案</span>
                 </div>
 
                 <!-- 支付区域 -->
@@ -4412,10 +4423,113 @@
             renderApiList();
             renderMyApiList();
 
-            // 页面跳转完成后再显示成功提示（确保页面完全渲染后再显示）
+            // 页面跳转完成后显示成功弹窗（需要手动关闭）
             setTimeout(() => {
-                showToast('申请成功', 'success');
+                showApplySuccessModal();
             }, 300);
+        }
+
+        // 申请成功弹窗（需要手动关闭）
+        function showApplySuccessModal() {
+            // 移除已有的弹窗
+            const existingModal = document.getElementById('applySuccessModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            // 创建弹窗元素
+            const modal = document.createElement('div');
+            modal.id = 'applySuccessModal';
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: modalFadeIn 0.3s ease;
+            `;
+
+            modal.innerHTML = `
+                <div style="
+                    background: #fff;
+                    border-radius: 12px;
+                    padding: 40px 48px;
+                    text-align: center;
+                    max-width: 400px;
+                    width: 90%;
+                    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+                    animation: modalSlideIn 0.3s ease;
+                ">
+                    <div style="
+                        width: 72px;
+                        height: 72px;
+                        background: #f6ffed;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 0 auto 20px;
+                    ">
+                        <i class="fas fa-check" style="font-size: 36px; color: #52c41a;"></i>
+                    </div>
+                    <h3 style="font-size: 20px; font-weight: 600; color: #333; margin-bottom: 12px;">接口申请成功</h3>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 24px; line-height: 1.6;">您申请的接口已添加到「我申请的接口」列表中，可立即查看和使用</p>
+                    <button onclick="closeApplySuccessModal()" style="
+                        background: #1890ff;
+                        color: #fff;
+                        border: none;
+                        padding: 10px 32px;
+                        border-radius: 6px;
+                        font-size: 14px;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    " onmouseover="this.style.background='#40a9ff'" onmouseout="this.style.background='#1890ff'">
+                        我知道了
+                    </button>
+                </div>
+            `;
+
+            // 添加动画样式
+            if (!document.getElementById('applySuccessModalStyle')) {
+                const style = document.createElement('style');
+                style.id = 'applySuccessModalStyle';
+                style.textContent = `
+                    @keyframes modalFadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    @keyframes modalSlideIn {
+                        from { opacity: 0; transform: translateY(-30px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+
+            document.body.appendChild(modal);
+
+            // 点击背景关闭弹窗
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeApplySuccessModal();
+                }
+            });
+        }
+
+        // 关闭申请成功弹窗
+        function closeApplySuccessModal() {
+            const modal = document.getElementById('applySuccessModal');
+            if (modal) {
+                modal.style.animation = 'modalFadeIn 0.2s ease reverse';
+                setTimeout(() => {
+                    modal.remove();
+                }, 200);
+            }
         }
 
         // Toast提示函数
