@@ -1650,7 +1650,7 @@
                     <span class="balance-amount">购买接口套餐</span>
                 </div>
                 <div class="header-nav" style="margin: 0;">
-                    <a href="index.html" class="nav-btn">首页</a>
+                    <a href="首页.html" class="nav-btn">首页</a>
                     <a href="#" class="nav-btn active" onclick="showPage('apis')">全部数据接口</a>
                     <a href="#" class="nav-btn" onclick="showPage('myapis')">我的接口</a>
                 </div>
@@ -1786,7 +1786,7 @@
                 </div>
 
                 <!-- 最近调用记录 -->
-                <div class="api-card">
+                <div class="api-card" style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h3 style="font-size: 16px; font-weight: 600; color: #333;">最近调用记录</h3>
                         <a href="#" style="color: #1890ff; font-size: 14px;" onclick="openRecordsModal()">查看全部</a>
@@ -1881,7 +1881,7 @@
             <!-- ===== 第二版新增：我申请的接口页 ===== -->
             <div id="page-myapis" class="page-section" style="display: none;">
                 <!-- 统计卡片 -->
-                <div class="stats-overview" style="margin-bottom: 24px;">
+                <div class="stats-overview" style="margin-bottom: 15px;">
                     <div class="stat-card">
                         <div class="stat-header">
                             <span class="stat-title">接口余额</span>
@@ -1940,8 +1940,30 @@
                     </div>
                 </div>
 
+                <!-- 推广横幅 -->
+                <div class="promo-banner" style="margin-bottom: 15px; background: linear-gradient(90deg, #fff7e6 0%, #fff1f0 100%); border: 1px solid #ffd8bf; border-radius: 8px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #ff4d4f 0%, #ff7875 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <i class="fas fa-gift" style="color: #fff; font-size: 20px;"></i>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                <span style="background: #ff4d4f; color: #fff; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: 600;">HOT</span>
+                                <span style="font-size: 15px; font-weight: 600; color: #333;">接口充值限时优惠</span>
+                            </div>
+                            <div style="font-size: 13px; color: #666;">充200送20 · 充500送50 · 充1000送200</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <span style="font-size: 13px; color: #ff4d4f; font-weight: 600;">充值最高送¥200</span>
+                        <button onclick="openRechargeModal()" style="background: linear-gradient(90deg, #ff4d4f 0%, #ff7875 100%); color: #fff; border: none; padding: 8px 20px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 8px rgba(255,77,79,0.3);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 4px 12px rgba(255,77,79,0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(255,77,79,0.3)';">
+                            立即充值 →
+                        </button>
+                    </div>
+                </div>
+
                 <!-- API密钥 -->
-                <div class="api-key-section" style="margin-bottom: 24px;">
+                <div class="api-key-section" style="margin-bottom: 15px;">
                     <div class="api-key-header">
                         <div class="api-key-title">
                             <i class="fas fa-key" style="color: #1890ff;"></i>
@@ -1997,7 +2019,7 @@
                 </div>
 
                 <!-- 我申请的接口列表 -->
-                <div class="api-card" style="margin-bottom: 24px;">
+                <div class="api-card" style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <div>
                             <h3 style="font-size: 16px; font-weight: 600; color: #333;">我申请的接口<span style="font-size: 12px; color: #999; font-weight: normal; margin-left: 8px;">（查看和管理您已申请的接口）</span></h3>
@@ -2043,7 +2065,7 @@
                 </div>
 
                 <!-- 最近调用记录 -->
-                <div class="api-card">
+                <div class="api-card" style="margin-bottom: 15px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                         <h3 style="font-size: 16px; font-weight: 600; color: #333;">最近调用记录</h3>
                         <a href="#" style="color: #1890ff; font-size: 14px;" onclick="openRecordsModal()">查看全部</a>
@@ -3572,6 +3594,18 @@
 
         // ===== 弹窗控制 =====
         function openDetailModal(apiId) {
+            // 检查是否在申请接口流程中（勾选页面或确认页面显示中）
+            const selectPage = document.getElementById('page-select');
+            const confirmPage = document.getElementById('page-confirm');
+            const selectPageDisplay = selectPage ? window.getComputedStyle(selectPage).display : 'none';
+            const confirmPageDisplay = confirmPage ? window.getComputedStyle(confirmPage).display : 'none';
+            
+            if (selectPageDisplay !== 'none' || confirmPageDisplay !== 'none') {
+                // 在申请接口流程中，不显示详情弹窗
+                console.log('在申请接口流程中，禁用详情弹窗');
+                return;
+            }
+            
             currentApiId = apiId;
             const api = findApiById(apiId);
             if (api) {
@@ -3620,6 +3654,9 @@
 
         // 打开勾选页面并预选指定接口
         function openSelectPageWithApi(apiId) {
+            // 先关闭详情弹窗
+            closeModal('detailModal');
+            
             selectedApis.clear();
             selectedApis.add(apiId);
             openSelectPage();
@@ -3802,13 +3839,47 @@
             document.getElementById('successGiftAmount').textContent = '+¥' + (getAmount - payAmount).toLocaleString();
             document.getElementById('successTotalAmount').textContent = '¥' + getAmount.toLocaleString();
 
-            // 更新余额
-            const currentBalance = parseFloat(document.getElementById('apiBalanceAmount').textContent.replace(/,/g, ''));
-            const newBalance = currentBalance + getAmount;
-            document.getElementById('apiBalanceAmount').textContent = newBalance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            // 保存充值金额用于后续动画
+            window.rechargeAmount = getAmount;
 
             // 打开支付成功弹窗
             document.getElementById('paymentSuccessModal').classList.add('show');
+        }
+
+        // 数字滚动动画函数
+        function animateBalanceIncrease(startBalance, increaseAmount, duration) {
+            const endBalance = startBalance + increaseAmount;
+            const balanceElement = document.getElementById('apiBalanceAmount');
+            const startTime = performance.now();
+            
+            // 添加高亮效果
+            balanceElement.style.transition = 'color 0.3s';
+            balanceElement.style.color = '#52c41a';
+            
+            function updateNumber(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // 使用缓动函数让动画更自然
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                
+                const currentBalance = startBalance + (increaseAmount * easeOutQuart);
+                balanceElement.textContent = currentBalance.toLocaleString('en-US', { 
+                    minimumFractionDigits: 2, 
+                    maximumFractionDigits: 2 
+                });
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateNumber);
+                } else {
+                    // 动画结束，恢复原始颜色
+                    setTimeout(() => {
+                        balanceElement.style.color = '#333';
+                    }, 500);
+                }
+            }
+            
+            requestAnimationFrame(updateNumber);
         }
 
         // 关闭支付成功弹窗并跳转到我的接口页
@@ -3834,6 +3905,29 @@
 
             // 渲染我的接口列表
             renderMyApiList();
+
+            // 触发余额滚动动画
+            if (window.rechargeAmount && window.rechargeAmount > 0) {
+                const rechargeAmount = window.rechargeAmount;
+                // 获取当前显示的余额（这是充值后的余额）
+                const currentBalance = parseFloat(document.getElementById('apiBalanceAmount').textContent.replace(/,/g, ''));
+                // 计算原始余额（充值前的余额）
+                const originalBalance = currentBalance - rechargeAmount;
+                
+                // 先恢复显示原始余额（减去充值金额）
+                document.getElementById('apiBalanceAmount').textContent = originalBalance.toLocaleString('en-US', { 
+                    minimumFractionDigits: 2, 
+                    maximumFractionDigits: 2 
+                });
+                
+                // 延迟一点开始动画，让用户能看到页面切换和初始余额
+                setTimeout(() => {
+                    animateBalanceIncrease(originalBalance, rechargeAmount, 1500);
+                }, 400);
+                
+                // 清除充值金额
+                window.rechargeAmount = null;
+            }
         }
 
         // 跳转到接口列表页
@@ -3988,13 +4082,18 @@
                             </div>
                         </div>
                         
-                        <div style="background: #f6ffed; border: 1px solid #b7eb8f; border-radius: 6px; padding: 16px; margin-bottom: 20px;">
+                        <div style="background: #f6ffed; border: 1px solid #b7eb8f; border-radius: 6px; padding: 16px; margin-bottom: 16px;">
                             <div style="font-size: 14px; font-weight: 600; color: #52c41a; margin-bottom: 12px;">
                                 <i class="fas fa-lightbulb" style="margin-right: 6px;"></i>下一步操作指引
                             </div>
                             <div style="font-size: 13px; color: #333; line-height: 1.8;">
                                 <div style="margin-bottom: 8px;"><strong>1. 正式调用</strong> - 在您的系统中使用密钥调用API</div>
                             </div>
+                        </div>
+
+                        <div style="background: #e6f7ff; border: 1px solid #91d5ff; border-radius: 6px; padding: 12px 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-info-circle" style="color: #1890ff; font-size: 16px;"></i>
+                            <span style="font-size: 13px; color: #333;">温馨提示：接口使用遇到问题？请联系客服经理 <strong style="color: #1890ff;">13911878573</strong></span>
                         </div>
 
                         <div style="display: flex; gap: 12px; justify-content: flex-end;">

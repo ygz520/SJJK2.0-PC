@@ -196,10 +196,10 @@
             font-weight: 500;
         }
 
-        /* Banner区域 */
+        /* Banner区域 - 新版设计 */
         .banner {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
-            height: 400px;
+            background: linear-gradient(135deg, #0d1b4c 0%, #1e3a8a 50%, #2563eb 100%);
+            height: 500px;
             position: relative;
             overflow: hidden;
         }
@@ -211,77 +211,293 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 60% 60%, rgba(6, 182, 212, 0.15) 0%, transparent 40%);
+        }
+        
+        .banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.03)" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
             background-size: cover;
         }
         
         .banner-content {
             width: 1200px;
             margin: 0 auto;
-            height: 100%;
+            height: 500px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: relative;
             z-index: 1;
+            padding: 0;
         }
         
         .banner-left {
             color: #fff;
+            flex: 1;
+            max-width: 600px;
         }
         
         .banner-title {
-            font-size: 42px;
+            font-size: 52px;
             font-weight: 700;
-            margin-bottom: 16px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        
+        .banner-title .highlight {
+            color: #ff8c00;
         }
         
         .banner-subtitle {
-            font-size: 20px;
+            font-size: 22px;
             margin-bottom: 32px;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+        
+        .banner-divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff8c00, #ffa500);
+            margin-bottom: 32px;
+            border-radius: 2px;
+        }
+        
+        .banner-features {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .banner-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .banner-feature-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .banner-feature-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .banner-feature-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .banner-feature-desc {
+            font-size: 13px;
+            opacity: 0.8;
+        }
+        
+        .banner-actions {
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
         
         .banner-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: #fff;
-            color: #1890ff;
-            padding: 14px 32px;
-            border-radius: 30px;
+            background: linear-gradient(90deg, #ff8c00, #ffa500);
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 6px;
             font-size: 16px;
             font-weight: 600;
             text-decoration: none;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+            border: none;
+            cursor: pointer;
         }
         
         .banner-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
+            background: linear-gradient(90deg, #ffa500, #ffb84d);
+        }
+        
+        .banner-hotline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .banner-hotline i {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .banner-hotline-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .banner-hotline-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .banner-hotline-number {
+            font-size: 18px;
+            font-weight: 600;
         }
         
         .banner-right {
             position: relative;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .banner-illustration {
-            width: 400px;
+            width: 450px;
+            height: 350px;
+            position: relative;
+        }
+        
+        .banner-illustration::before {
+            content: '';
+            position: absolute;
+            width: 300px;
             height: 300px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 20px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .api-visual {
+            position: relative;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
         }
         
-        .banner-illustration i {
-            font-size: 120px;
-            color: rgba(255,255,255,0.3);
+        .api-main-box {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(37, 99, 235, 0.9));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 
+                0 20px 60px rgba(37, 99, 235, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .api-main-box span {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+        }
+        
+        .api-icon-float {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        .api-icon-float.icon-1 {
+            width: 60px;
+            height: 60px;
+            top: 20px;
+            right: 60px;
+            color: #3b82f6;
+            font-size: 28px;
+        }
+        
+        .api-icon-float.icon-2 {
+            width: 50px;
+            height: 50px;
+            bottom: 80px;
+            right: 30px;
+            color: #10b981;
+            font-size: 24px;
+        }
+        
+        .api-icon-float.icon-3 {
+            width: 55px;
+            height: 55px;
+            top: 80px;
+            left: 40px;
+            color: #f59e0b;
+            font-size: 26px;
+        }
+        
+        .api-icon-float.icon-4 {
+            width: 45px;
+            height: 45px;
+            bottom: 60px;
+            left: 70px;
+            color: #ef4444;
+            font-size: 20px;
+        }
+        
+        .connection-line {
+            position: absolute;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+        
+        .connection-line.line-1 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .connection-line.line-2 {
+            width: 280px;
+            height: 280px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         
         /* 新增接口模块 */
@@ -969,20 +1185,75 @@
     <section class="banner">
         <div class="banner-content">
             <div class="banner-left">
-                <h1 class="banner-title">提供招投标大数据接口服务</h1>
-                <p class="banner-subtitle">支持各行业数据调用，助力企业数字化转型</p>
-                <a href="所有数据接口.html?selectMode=true" class="banner-btn">
-                    <i class="fas fa-rocket"></i>
-                    申请接入API
-                </a>
-                <div class="banner-hotline" style="margin-top: 20px; display: flex; align-items: center; gap: 10px; color: #fff; font-size: 18px; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                    <i class="fas fa-phone-alt" style="font-size: 20px; color: #ffd700;"></i>
-                    <span>咨询热线：13911878573</span>
+                <h1 class="banner-title">数据接口 <span class="highlight">API</span></h1>
+                <p class="banner-subtitle">实时获取招投标数据 / 轻松对接企业系统</p>
+                <div class="banner-divider"></div>
+                
+                <div class="banner-features">
+                    <div class="banner-feature">
+                        <div class="banner-feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="banner-feature-text">
+                            <div class="banner-feature-title">实时更新</div>
+                            <div class="banner-feature-desc">数据准确</div>
+                        </div>
+                    </div>
+                    <div class="banner-feature">
+                        <div class="banner-feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="banner-feature-text">
+                            <div class="banner-feature-title">安全稳定</div>
+                            <div class="banner-feature-desc">可靠高效</div>
+                        </div>
+                    </div>
+                    <div class="banner-feature">
+                        <div class="banner-feature-icon">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                        <div class="banner-feature-text">
+                            <div class="banner-feature-title">标准接口</div>
+                            <div class="banner-feature-desc">快速对接</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="banner-actions">
+                    <a href="所有数据接口.html" class="banner-btn">
+                        <span>申请接入API</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <div class="banner-hotline">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="banner-hotline-text">
+                            <div class="banner-hotline-label">咨询热线</div>
+                            <div class="banner-hotline-number">13911878573</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="banner-right">
                 <div class="banner-illustration">
-                    <i class="fas fa-database"></i>
+                    <div class="connection-line line-1"></div>
+                    <div class="connection-line line-2"></div>
+                    <div class="api-visual">
+                        <div class="api-main-box">
+                            <span>API</span>
+                        </div>
+                        <div class="api-icon-float icon-1">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="api-icon-float icon-2">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="api-icon-float icon-3">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="api-icon-float icon-4">
+                            <i class="fas fa-plug"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
